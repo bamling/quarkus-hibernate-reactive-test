@@ -1,5 +1,7 @@
 package org.acme.hibernate.reactive;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,12 @@ import javax.persistence.Table;
 @Table(name = "known_fruits")
 @NamedQuery(name = "Fruits.findAll", query = "SELECT f FROM Fruit f ORDER BY f.name")
 public class Fruit {
+
+    public static class FruitList extends ArrayList<Fruit> {
+        public FruitList(final Collection<Fruit> fruits) {
+            super(fruits);
+        }
+    }
 
     @Id
     @SequenceGenerator(name = "fruitsSequence", sequenceName = "known_fruits_id_seq", allocationSize = 1, initialValue = 10)
